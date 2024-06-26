@@ -24,8 +24,10 @@
 
             <div>
                 @if (Auth::check())>
-                    <a href="#" onclick="return loadChildView('blogmanager');" class="header-right blog-manage" > Blog Management</a>
-                    <a href="#" onclick="return loadChildView('usermanager')" class="header-right users-manage" > Users</a>
+                    @if(Auth::user()->role !== 'comments')
+                        <a href="#" onclick="return loadChildView('blogmanager');" class="header-right blog-manage" > Blog Management</a>
+                        <a href="#" onclick="return loadChildView('usermanager')" class="header-right users-manage" > Users</a>
+                    @endif
                     <a href="{{ route('logout') }}" class="header-right login" > Logout</a>
                 @else
                     <a href="{{ route('login') }}" class="header-right login" > Login</a>
